@@ -40,7 +40,7 @@ var Player = function(){
    
     this.y = playerInitialY;
     playerY = this.y;
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/char-cat-girl.png';
 };
 
 Player.prototype.update = function(){
@@ -57,11 +57,13 @@ Player.prototype.update = function(){
         
     }
     if (this.y > 450){
-        this.y = 440;
+        this.y = playerInitialY;
     }
 
     for ( var i =0; i < allEnemies.length ; i++){
-        if( this.x == Math.round(allEnemies[i].x) && this.y == allEnemies[i].y){
+        if( ( (this.x == Math.round(allEnemies[i].x)) || 
+            ( (this.x+30) == (Math.round(allEnemies[i].x) -40)) ||
+            ( (this.x-30) == (Math.round(allEnemies[i].x) +40)) )  && this.y == allEnemies[i].y){
             this.y = playerInitialY;
         }
     }
@@ -108,10 +110,10 @@ Player.prototype.handleInput = function(key) {
 
 
 var allEnemies=[];
-allEnemies.push( easyBug = new Enemy(200,50,150));
+allEnemies.push( easyBug = new Enemy(200,50,250));
 allEnemies.push( normalBug = new Enemy(100,130,200));
 allEnemies.push(hardlBug = new Enemy(280,210,250));
-
+allEnemies.push(hardestlBug = new Enemy(0,290,250));
 var player = new Player();
 
 
