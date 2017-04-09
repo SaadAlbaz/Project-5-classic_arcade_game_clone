@@ -173,7 +173,7 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/char-cat-girl.png',
-        'images/Star.png',
+        
     ]);
     Resources.onReady(init);
 
