@@ -2,13 +2,12 @@
 var Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-    this.x = x;
-    this.y = y;
+    this.x = x;    // takes the intitial value the location x
+    this.y = y;     // takes the intitial value the location x 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.star = 'images/Star.png';
-    this.enemySpeed= speed;
+    this.enemySpeed= speed;     // set the enemy speed
 };
 
 
@@ -19,7 +18,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += (this.enemySpeed * dt);
-    if( this.x > 505 ){
+    if( this.x > 505 ){     // if the enemy goes off screen then returns again to screen
         this.x = 0;
     };
 };
@@ -33,46 +32,37 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-var playerInitialY = 370;
-var win = false;
+var playerInitialY = 370;       
+
 var Player = function(){
     this.x = 200;
-   
     this.y = playerInitialY;
-    playerY = this.y;
     this.sprite = 'images/char-cat-girl.png';
 };
 
 Player.prototype.update = function(){
-    if( this.x > 420 ){
+    if( this.x > 420 ){     // rules to make the player stay on screen
         this.x = 420;
     }
     if( this.x < 0 ){
         this.x = 0;
     }
-    if( this.y < 0 ){
-        this.y = playerInitialY;
-       alert("WIN");
-        
-        
-    }
     if (this.y > 450){
         this.y = playerInitialY;
     }
+    if( this.y < 0 ){       // the player reaches water
+        this.y = playerInitialY;
+        alert("WIN");   
+    }
 
-    for ( var i =0; i < allEnemies.length ; i++){
+    // the collision algorithem
+    for ( var i =0; i < allEnemies.length ; i++){ 
         if( ( (this.x == Math.round(allEnemies[i].x)) || 
             ( (this.x+30) == (Math.round(allEnemies[i].x) -40)) ||
             ( (this.x-30) == (Math.round(allEnemies[i].x) +40)) )  && this.y == allEnemies[i].y){
-            this.y = playerInitialY;
+            this.y = playerInitialY;        // if collision occure player return to initial location
         }
     }
-    //( Math.round(allEnemies[i].x + 5) > this.x > Math.round(allEnemies[i].x - 5))
-
-    // console.log("enemy plus 5  "+ Math.round(allEnemies[1].x + 5));
-    // console.log("enemy minus 5  "+ Math.round(allEnemies[1].x - 5));
-    // console.log("player  "+this.x);
-    //console.log("player  "+this.y);
 };
 
 Player.prototype.render = function(){
@@ -80,23 +70,23 @@ Player.prototype.render = function(){
 }
 
 Player.prototype.handleInput = function(key) {
+    // handles the user mpvment of the player
+    switch (key) {
+        case "left":
+        this.x = this.x - 100;
+        break;
 
- switch (key) {
-    case "left":
-      this.x = this.x - 100;
-    break;
+        case "right": 
+        this.x = this.x + 100;
+        break;
 
-    case "right": 
-      this.x = this.x + 100;
-    break;
+        case "up":
+        this.y -= 80;
+        break;
 
-    case "up":
-      this.y -= 80;
-    break;
-
-    case "down":
-      this.y += 80;
-    break;  
+        case "down":
+        this.y += 80;
+        break;  
     }
 
    
@@ -106,14 +96,12 @@ Player.prototype.handleInput = function(key) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-
-
-
 var allEnemies=[];
 allEnemies.push( easyBug = new Enemy(200,50,250));
 allEnemies.push( normalBug = new Enemy(100,130,200));
-allEnemies.push(hardlBug = new Enemy(280,210,250));
-allEnemies.push(hardestlBug = new Enemy(0,290,250));
+allEnemies.push( hardlBug = new Enemy(280,210,250));
+allEnemies.push( hardestlBug = new Enemy(0,290,250));
+
 var player = new Player();
 
 
