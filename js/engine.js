@@ -25,7 +25,7 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    canvas.width = 505;
+    canvas.width = 909;
     canvas.height = 606;
     doc.body.appendChild(canvas);
 
@@ -111,12 +111,13 @@ var Engine = (function(global) {
                 'images/water-block.png',   // Top row is water
                 'images/stone-block.png',   // Row 1 of 3 of stone
                 'images/stone-block.png',   // Row 2 of 3 of stone
+                'images/stone-block.png',
                 'images/stone-block.png',   // Row 3 of 3 of stone
                 'images/grass-block.png',   // Row 1 of 2 of grass
                 'images/grass-block.png'    // Row 2 of 2 of grass
             ],
-            numRows = 6,
-            numCols = 5,
+            numRows =7,
+            numCols = 10    ,
             row, col;
 
         /* Loop through the number of rows and columns we've defined above
@@ -150,7 +151,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
+        star.render();
         player.render();
     }
 
@@ -173,7 +174,8 @@ var Engine = (function(global) {
         'images/enemy-bug.png',
         'images/char-boy.png',
         'images/char-cat-girl.png',
-        
+        'images/Rock.png',
+        'images/Star.png'
     ]);
     Resources.onReady(init);
 
